@@ -9,6 +9,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.commit
+import com.dlom.calculator.calc.CalcFragment
 import com.dlom.calculator.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
@@ -36,6 +38,11 @@ class MainActivity : AppCompatActivity() {
 //        findViewById<FloatingActionButton>(R.id.calc).setOnClickListener { calc() }
 //        binding.calc.setOnClickListener { calc() }
 //        binding.share.setOnClickListener { share() }
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.commit {
+//                add(R.id.container, CalcFragment())
+//            }
+//        }
         Log.d(TAG, "Intent: ${intent.dataString}")
     }
 

@@ -41,7 +41,10 @@ class CalcFragment : Fragment() {
             R.id.add -> a + b
             R.id.sub -> a - b
             R.id.mul -> a * b
-            R.id.div -> a / b
+            R.id.div -> {
+                if (b == 0f) ZeroDialog().show(childFragmentManager, null)
+                a / b
+            }
             else -> Float.NaN
         }.toString()
     }
