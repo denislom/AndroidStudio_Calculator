@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calculate">Spočítat</string>
+    <string name="share">Sdilet</string>
+    <string name="share_text">Vysledek je %1$s</string>
+</resources>

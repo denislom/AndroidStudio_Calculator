@@ -1,5 +1,6 @@
 package com.dlom.calculator
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.RadioGroup
@@ -32,9 +33,23 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        findViewById<FloatingActionButton>(R.id.calc).setOnClickListener { calc() }
+//        findViewById<FloatingActionButton>(R.id.calc).setOnClickListener { calc() }
+        binding.calc.setOnClickListener { calc() }
+        binding.share.setOnClickListener { share() }
+        Log.d(TAG, "Intent: ${intent.dataString}")
     }
 
+    private fun share() {
+        Log.d(TAG, "Share")
+        startActivity(
+            Intent(Intent.ACTION_SEND)
+                .setType("text/plain")
+                .putExtra(
+                    Intent.EXTRA_TEXT,
+                    getString(R.string.share_text, binding.res.text)
+                )
+        )
+    }
     private fun calc() {
         Log.d(TAG, "Calc!")
         val a = "${binding.aText.text}".toFloatOrNull() ?: Float.NaN
