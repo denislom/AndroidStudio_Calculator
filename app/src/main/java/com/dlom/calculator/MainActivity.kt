@@ -8,21 +8,25 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.dlom.calculator.databinding.ActivityMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
 
 class MainActivity : AppCompatActivity() {
-    private val aText by lazy {findViewById<TextInputEditText>(R.id.a_text)}
-    private val bText by lazy {findViewById<TextInputEditText>(R.id.b_text)}
-    private val ops by lazy {findViewById<RadioGroup>(R.id.ops)}
-    private val res by lazy {findViewById<MaterialTextView>(R.id.res)}
+//    private val aText by lazy {findViewById<TextInputEditText>(R.id.a_text)}
+//    private val bText by lazy {findViewById<TextInputEditText>(R.id.b_text)}
+//    private val ops by lazy {findViewById<RadioGroup>(R.id.ops)}
+//    private val res by lazy {findViewById<MaterialTextView>(R.id.res)}
+
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+//        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root ) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() + WindowInsetsCompat.Type.ime()
             )
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -33,9 +37,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun calc() {
         Log.d(TAG, "Calc!")
-        val a = "${aText.text}".toFloatOrNull() ?: Float.NaN
-        val b = "${bText.text}".toFloatOrNull() ?: Float.NaN
-        res.text = when(ops.checkedRadioButtonId) {
+        val a = "${binding.aText.text}".toFloatOrNull() ?: Float.NaN
+        val b = "${binding.bText.text}".toFloatOrNull() ?: Float.NaN
+        binding.res.text = when(binding.ops.checkedRadioButtonId) {
             R.id.add -> a + b
             R.id.sub -> a - b
             R.id.mul -> a * b
@@ -46,12 +50,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putCharSequence(RES_KEY, res.text)
+        outState.putCharSequence(RES_KEY, binding.res.text)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        res.text = savedInstanceState.getCharSequence(RES_KEY)
+        binding.res.text = savedInstanceState.getCharSequence(RES_KEY)
     }
 
     override fun onResume() {
