@@ -4,4 +4,5 @@
     <string name="share">Share</string>
     <string name="share_text">The result is %1$s</string>
     <string name="zero_div">Can\'t divide by zero!</string>
+    <string name="about">About</string>
 </resources>

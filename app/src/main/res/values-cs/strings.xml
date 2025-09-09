@@ -4,4 +4,5 @@
     <string name="share">Sdilet</string>
     <string name="share_text">Vysledek je %1$s</string>
     <string name="zero_div">Nelze delit nulou!</string>
+    <string name="about">O appce</string>
 </resources>

@@ -4,14 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import com.dlom.calculator.R
 import com.dlom.calculator.databinding.FragmentCalcBinding
 import java.security.PrivateKey
 
-class CalcFragment : Fragment() {
+class CalcFragment : Fragment(), MenuProvider {
     private var binding : FragmentCalcBinding? = null
 
     override fun onCreateView(
@@ -50,6 +54,7 @@ class CalcFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        requireActivity().addMenuProvider(this, viewLifecycleOwner)
         binding?.calc?.setOnClickListener { calc() }
         binding?.share?.setOnClickListener { share() }
         super.onViewCreated(view, savedInstanceState)
@@ -58,6 +63,15 @@ class CalcFragment : Fragment() {
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem) = when (menuItem.itemId) {
+        R.id.about -> TODO()
+        else -> false
     }
 
      private companion object {
