@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.dlom.calculator.R
+import com.dlom.calculator.about.AboutFragment
 import com.dlom.calculator.databinding.FragmentCalcBinding
 import java.security.PrivateKey
 
@@ -70,7 +72,13 @@ class CalcFragment : Fragment(), MenuProvider {
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem) = when (menuItem.itemId) {
-        R.id.about -> TODO()
+        R.id.about -> {
+            parentFragmentManager.commit {
+                replace(R.id.container, AboutFragment("Denis Lom"))
+                addToBackStack(null)
+            }
+            true
+        }
         else -> false
     }
 

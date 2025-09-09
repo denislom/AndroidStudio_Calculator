@@ -5,4 +5,5 @@
     <string name="share_text">The result is %1$s</string>
     <string name="zero_div">Can\'t divide by zero!</string>
     <string name="about">About</string>
+    <string name="made_by">Made by %1$s</string>
 </resources>
