@@ -34,44 +34,44 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 //        findViewById<FloatingActionButton>(R.id.calc).setOnClickListener { calc() }
-        binding.calc.setOnClickListener { calc() }
-        binding.share.setOnClickListener { share() }
+//        binding.calc.setOnClickListener { calc() }
+//        binding.share.setOnClickListener { share() }
         Log.d(TAG, "Intent: ${intent.dataString}")
     }
 
-    private fun share() {
-        Log.d(TAG, "Share")
-        startActivity(
-            Intent(Intent.ACTION_SEND)
-                .setType("text/plain")
-                .putExtra(
-                    Intent.EXTRA_TEXT,
-                    getString(R.string.share_text, binding.res.text)
-                )
-        )
-    }
-    private fun calc() {
-        Log.d(TAG, "Calc!")
-        val a = "${binding.aText.text}".toFloatOrNull() ?: Float.NaN
-        val b = "${binding.bText.text}".toFloatOrNull() ?: Float.NaN
-        binding.res.text = when(binding.ops.checkedRadioButtonId) {
-            R.id.add -> a + b
-            R.id.sub -> a - b
-            R.id.mul -> a * b
-            R.id.div -> a / b
-            else -> Float.NaN
-        }.toString()
-    }
+//    private fun share() {
+//        Log.d(TAG, "Share")
+//        startActivity(
+//            Intent(Intent.ACTION_SEND)
+//                .setType("text/plain")
+//                .putExtra(
+//                    Intent.EXTRA_TEXT,
+//                    getString(R.string.share_text, binding.res.text)
+//                )
+//        )
+//    }
+//    private fun calc() {
+//        Log.d(TAG, "Calc!")
+//        val a = "${binding.aText.text}".toFloatOrNull() ?: Float.NaN
+//        val b = "${binding.bText.text}".toFloatOrNull() ?: Float.NaN
+//        binding.res.text = when(binding.ops.checkedRadioButtonId) {
+//            R.id.add -> a + b
+//            R.id.sub -> a - b
+//            R.id.mul -> a * b
+//            R.id.div -> a / b
+//            else -> Float.NaN
+//        }.toString()
+//    }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putCharSequence(RES_KEY, binding.res.text)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        binding.res.text = savedInstanceState.getCharSequence(RES_KEY)
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        outState.putCharSequence(RES_KEY, binding.res.text)
+//    }
+//
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//        binding.res.text = savedInstanceState.getCharSequence(RES_KEY)
+//    }
 
     override fun onResume() {
         super.onResume()
