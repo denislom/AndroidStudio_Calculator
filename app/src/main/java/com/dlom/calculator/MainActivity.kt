@@ -44,6 +44,16 @@ class MainActivity : AppCompatActivity() {
         }.toString()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putCharSequence(RES_KEY, res.text)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        res.text = savedInstanceState.getCharSequence(RES_KEY)
+    }
+
     override fun onResume() {
         super.onResume()
         if (BuildConfig.DEBUG) {
@@ -65,5 +75,6 @@ class MainActivity : AppCompatActivity() {
 
     private companion object {
         private val TAG = MainActivity::class.simpleName
+        private const val RES_KEY = "res"
     }
 }
