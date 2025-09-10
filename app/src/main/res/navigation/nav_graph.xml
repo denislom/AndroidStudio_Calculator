@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/calcFragment">
+
+
+    <fragment
+        android:id="@+id/calcFragment"
+        android:name="com.dlom.calculator.calc.CalcFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_calc"
+        >
+        <action
+            android:id="@+id/action_calcFragment_to_zeroDialog"
+            app:destination="@id/zeroDialog" />
+        <action
+            android:id="@+id/action_calcFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/zeroDialog"
+        android:name="com.dlom.calculator.calc.ZeroDialog"
+        android:label="ZeroDialog" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.dlom.calculator.about.AboutFragment"
+        android:label="@string/about"
+        tools:layout="@layout/fragment_about">
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
+</navigation>
