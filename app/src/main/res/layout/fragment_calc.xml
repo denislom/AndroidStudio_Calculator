@@ -7,15 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ans"
+        android:text="@string/ans"
+        app:layout_constraintBaseline_toBaselineOf="@id/a_layout"
+        app:layout_constraintEnd_toStartOf="@id/a_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/a_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/ops"
         app:layout_constraintEnd_toStartOf="@id/b_layout"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed">
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/ans">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/a_text"
