@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.commit
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -45,6 +46,10 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "Resume")
         }
     }
+
+    override fun onSupportNavigateUp() =
+        findNavController(R.id.container).navigateUp() || super.onSupportNavigateUp()
+
 
     override fun onPause() {
         super.onPause()
