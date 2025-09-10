@@ -16,14 +16,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.dlom.calculator.R
 import com.dlom.calculator.databinding.FragmentCalcBinding
+import com.dlom.calculator.history.HistoryEntity
+import com.dlom.calculator.history.HistoryViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class CalcFragment : Fragment(), MenuProvider {
     private var binding : FragmentCalcBinding? = null
     private val viewModel: CalcViewModel by viewModels()
-
+    private val historyViewModel: HistoryViewModel by viewModels( {requireActivity()} )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +67,10 @@ class CalcFragment : Fragment(), MenuProvider {
         binding?.share?.setOnClickListener { share() }
         binding?.ans?.setOnClickListener {
             binding?.aText?.setText("${viewModel.ans}")
+        }
+
+        lifecycleScope.launch(Dispatchers.Default){
+            historyViewModel.db.add(HistoryEntity(10f))
         }
         super.onViewCreated(view, savedInstanceState)
     }
