@@ -25,7 +25,7 @@ class CalcViewModel(app: Application) : AndroidViewModel(app) {
         Log.d(TAG, "Calc!")
 
         thread {
-            Thread.sleep(2.seconds.inWholeMilliseconds)
+//            Thread.sleep(2.seconds.inWholeMilliseconds)
             _res.value = when (op) {
                 R.id.add -> a + b
                 R.id.sub -> a - b
