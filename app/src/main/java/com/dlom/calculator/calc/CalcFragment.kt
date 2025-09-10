@@ -11,15 +11,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.dlom.calculator.R
-import com.dlom.calculator.about.AboutFragment
 import com.dlom.calculator.databinding.FragmentCalcBinding
-import java.security.PrivateKey
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class CalcFragment : Fragment(), MenuProvider {
     private var binding : FragmentCalcBinding? = null
+    private val viewModel: CalcViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,28 +44,22 @@ class CalcFragment : Fragment(), MenuProvider {
                 )
         )
     }
-    private fun calc() {
-        Log.d(TAG, "Calc!")
-        val a = "${binding?.aText?.text}".toFloatOrNull() ?: Float.NaN
-        val b = "${binding?.bText?.text}".toFloatOrNull() ?: Float.NaN
-        binding?.res?.text = when (binding?.ops?.checkedRadioButtonId) {
-            R.id.add -> a + b
-            R.id.sub -> a - b
-            R.id.mul -> a * b
-            R.id.div -> {
-                if (b == 0f) {
-//                    ZeroDialog().show(childFragmentManager, null)
-                    findNavController().navigate(CalcFragmentDirections.actionCalcFragmentToZeroDialog())
-                }
-                a / b
-            }
-            else -> Float.NaN
-        }.toString()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
-        binding?.calc?.setOnClickListener { calc() }
+        binding?.calc?.setOnClickListener {
+            viewModel.calc(
+                "${binding?.aText?.text}".toFloatOrNull() ?: Float.NaN,
+                "${binding?.bText?.text}".toFloatOrNull() ?: Float.NaN,
+                binding?.ops?.checkedRadioButtonId ?: -1
+            )
+        }
+        viewModel.res
+            .filterNotNull()
+            .onEach {
+                binding?.res?.text = "$it"
+            }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
         binding?.share?.setOnClickListener { share() }
         super.onViewCreated(view, savedInstanceState)
     }
