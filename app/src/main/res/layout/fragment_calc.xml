@@ -110,7 +110,7 @@
         tools:text="123.456"
         android:freezesText="true"
         />
-1
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/share"
         style="@style/Widget.Material3.Button.Icon"
