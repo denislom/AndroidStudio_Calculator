@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.navigation.fragment.findNavController
 import com.dlom.calculator.R
 import com.dlom.calculator.about.AboutFragment
 import com.dlom.calculator.databinding.FragmentCalcBinding
@@ -48,7 +49,10 @@ class CalcFragment : Fragment(), MenuProvider {
             R.id.sub -> a - b
             R.id.mul -> a * b
             R.id.div -> {
-                if (b == 0f) ZeroDialog().show(childFragmentManager, null)
+                if (b == 0f) {
+//                    ZeroDialog().show(childFragmentManager, null)
+                    findNavController().navigate(CalcFragmentDirections.actionCalcFragmentToZeroDialog())
+                }
                 a / b
             }
             else -> Float.NaN
@@ -73,10 +77,11 @@ class CalcFragment : Fragment(), MenuProvider {
 
     override fun onMenuItemSelected(menuItem: MenuItem) = when (menuItem.itemId) {
         R.id.about -> {
-            parentFragmentManager.commit {
-                replace(R.id.container, AboutFragment("Denis Lom"))
-                addToBackStack(null)
-            }
+//            parentFragmentManager.commit {
+//                replace(R.id.container, AboutFragment("Denis Lom"))
+//                addToBackStack(null)
+//            }
+            findNavController().navigate(CalcFragmentDirections.actionCalcFragmentToAboutFragment("Denis Lom <3"))
             true
         }
         else -> false
