@@ -56,4 +56,5 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.preference.ktx)
 }

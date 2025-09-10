@@ -61,6 +61,9 @@ class CalcFragment : Fragment(), MenuProvider {
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
         binding?.share?.setOnClickListener { share() }
+        binding?.ans?.setOnClickListener {
+            binding?.aText?.setText("${viewModel.ans}")
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 
