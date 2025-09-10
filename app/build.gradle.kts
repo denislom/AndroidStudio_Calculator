@@ -59,5 +59,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.preference.ktx)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.recyclerview)
     ksp(libs.androidx.room.compiler)
 }

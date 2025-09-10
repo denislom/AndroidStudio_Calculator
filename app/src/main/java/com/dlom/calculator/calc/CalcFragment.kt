@@ -62,15 +62,12 @@ class CalcFragment : Fragment(), MenuProvider {
             .filterNotNull()
             .onEach {
                 binding?.res?.text = "$it"
+                historyViewModel.db.add(HistoryEntity(it))
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
         binding?.share?.setOnClickListener { share() }
         binding?.ans?.setOnClickListener {
             binding?.aText?.setText("${viewModel.ans}")
-        }
-
-        lifecycleScope.launch(Dispatchers.Default){
-            historyViewModel.db.add(HistoryEntity(10f))
         }
         super.onViewCreated(view, savedInstanceState)
     }
