@@ -1,6 +1,7 @@
 package com.dlom.calculator.calc
 
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -62,7 +63,11 @@ class CalcFragment : Fragment(), MenuProvider {
             .filterNotNull()
             .onEach {
                 binding?.res?.text = "$it"
-                historyViewModel.db.add(HistoryEntity(it))
+                try {
+                    historyViewModel.db.add(HistoryEntity(it))
+                } catch (e: SQLiteConstraintException) {
+                    Log.w(TAG, e)
+                }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
         binding?.share?.setOnClickListener { share() }
@@ -88,6 +93,10 @@ class CalcFragment : Fragment(), MenuProvider {
 //                addToBackStack(null)
 //            }
             findNavController().navigate(CalcFragmentDirections.actionCalcFragmentToAboutFragment("Denis Lom <3"))
+            true
+        }
+        R.id.history -> {
+            findNavController().navigate(CalcFragmentDirections.history())
             true
         }
         else -> false

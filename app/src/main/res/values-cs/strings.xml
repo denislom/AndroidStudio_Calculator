@@ -6,4 +6,5 @@
     <string name="zero_div">Nelze delit nulou!</string>
     <string name="about">O appce</string>
     <string name="made_by">Napsal %1$s</string>
+    <string name="history">Historie</string>
 </resources>

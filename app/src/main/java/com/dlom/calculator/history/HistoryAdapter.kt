@@ -10,6 +10,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 class HistoryAdapter : ListAdapter<HistoryEntity, HistoryAdapter.HistoryViewHolder>(DIFF) {
+    init {
+        setHasStableIds(true)
+    }
+
+    override fun getItemId(position: Int) = getItem(position).id
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         HistoryViewHolder(
             LayoutInflater.from(parent.context)

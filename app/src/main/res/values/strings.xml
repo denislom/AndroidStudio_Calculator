@@ -7,4 +7,5 @@
     <string name="about">About</string>
     <string name="made_by">Made by %1$s</string>
     <string name="ans" translatable="false">Ans</string>
+    <string name="history">History</string>
 </resources>
